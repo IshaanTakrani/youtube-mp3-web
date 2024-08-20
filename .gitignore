@@ -1,5 +1,6 @@
 .mp3
 .mp4
+env/
 env
 server/.txt
 *.mp3
