@@ -2,7 +2,7 @@
 .mp4
 env/
 env
-server/.txt
+server/*.txt
 *.mp3
 *.m4a
 *.mpeg
