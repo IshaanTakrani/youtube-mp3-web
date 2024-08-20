@@ -1,0 +1,8 @@
+.mp3
+.mp4
+env
+server/.txt
+*.mp3
+*.m4a
+*.mpeg
+*.webm

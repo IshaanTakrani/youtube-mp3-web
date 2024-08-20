@@ -1,0 +1,288 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* justify-content: center; */
+  text-align: center;
+  /* justify-content: center; */
+  width: 100%;
+  padding-top: 3em;
+  margin: 0px;
+  font-family: "IBM Plex Sans";
+}
+
+button {
+  font-family: "IBM Plex Sans";
+  font-size: 1.2rem;
+}
+
+#page-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#page-title img {
+  min-width: 15em;
+  max-width: 25%;
+}
+
+#page-title p {
+  margin-top: 0px;
+  font-size: 1.5rem;
+  font-family: "IBM Plex Sans";
+  /* padding-top: 0px; */
+}
+
+#url-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  width: 75%;
+  min-width: 600px;
+  transform: translatex(3%);
+}
+
+.gen-text-input {
+  border-radius: 12px;
+  border-style: solid;
+  border-color: #8b8b8b;
+  border-width: 2px;
+  padding-left: 3rem;
+  padding-right: 125px;
+  transition: 0.2s;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1.5em;
+  width: 100%;
+  max-width: 750px;
+}
+
+#url-container input {
+  line-height: 20px;
+  font-size: 20px;
+}
+
+#url-container input:hover {
+  background-color: #e7e7e7;
+}
+
+#url-container input:focus {
+  outline: none;
+  border-color: #5f5f5f;
+  padding-left: 3rem;
+}
+
+#url-container img {
+  transform: translateX(+150%);
+}
+
+#url-container button {
+  transform: translatex(-107%);
+  border-style: solid;
+  width: 100px;
+  line-height: 30px;
+  border-radius: 12px;
+  background-color: white;
+  border-color: red;
+  color: red;
+  transition: 0.2s;
+}
+
+#url-container button:hover {
+  color: white;
+  background-color: red;
+}
+
+#loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  margin-bottom: 0px;
+  transition: 2s;
+}
+
+#loading button {
+  border-style: solid;
+  border-color: red;
+  min-width: 180px;
+  min-height: 50px;
+  padding: 2%;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  margin: 15px;
+  border-radius: 12px;
+  font-size: 1.5em;
+  background-color: #ff0000;
+  color: white;
+  transition: 0.2s;
+}
+
+#loading button:hover {
+  background-color: #ffffff;
+  color: red;
+}
+
+/* action buttons */
+
+#action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 15px;
+  margin-top: 0px;
+}
+
+#action-buttons button {
+  min-width: 180px;
+  min-height: 50px;
+  padding: 2%;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  margin: 15px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1em;
+  flex: 1 1 100%;
+}
+
+/* #submit{
+  back
+} */
+
+/* Belos: table */
+
+#tags {
+  margin: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+  justify-content: center;
+  width: 35%;
+  min-width: 400px;
+}
+
+#tags h1 {
+  padding-left: 0.75rem;
+  font-style: normal;
+}
+
+table {
+  background-color: #eeeeee;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+table td,
+table th {
+  padding: 15px;
+  padding-left: 25px;
+}
+
+td input {
+  border-radius: 12px;
+  border-style: solid;
+  border-color: #8b8b8b;
+  border-width: 2px;
+  transition: 0.2s;
+  font-size: 1em;
+  width: 95%;
+  padding: 1%;
+  padding-left: 2%;
+  line-height: 20px;
+}
+
+td input:hover {
+  background-color: #e7e7e7;
+}
+
+td input:focus {
+  outline: none;
+  border-color: #5f5f5f;
+  /* padding-left: 3rem; */
+}
+
+td {
+  font-size: 1em;
+  color: #000000;
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+tr {
+  width: 100%;
+}
+
+td:nth-child(even) {
+  width: 85%;
+}
+
+td:nth-child(odd) {
+  width: 15%;
+}
+
+tr:nth-child(even) {
+  background: #ffffff;
+}
+/* table tfoot td {
+  font-size: 14px;
+}
+table tfoot .links {
+  text-align: right;
+}
+table tfoot .links a {
+  display: inline-block;
+  background: #1c6ea4;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 5px;
+} */
+
+/* tr:nth-child(even) { 
+  background-color: red; 
+} */
+
+/* Below: Loading */
+
+.lds-dual-ring,
+.lds-dual-ring:after {
+  box-sizing: border-box;
+  margin: 20px;
+  /* padding: 20rem; */
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6.4px solid red;
+  border-color: red transparent red transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
