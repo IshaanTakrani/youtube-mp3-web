@@ -56,6 +56,7 @@ async def cleanup():
         
 @app.get("/quote")
 async def quote():
+    pass
     # TODO: make sure this works
     # quote = get_quote()
     # return {quote[0], quote[1]}
