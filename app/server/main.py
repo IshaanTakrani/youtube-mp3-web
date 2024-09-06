@@ -11,6 +11,7 @@ class Mp3_tag_data(BaseModel):
     album: str
     artist: str
     genre: str
+    year: str
 
 
 app = FastAPI()
@@ -40,13 +41,22 @@ async def quote():
 async def submit_tag_data(data: Mp3_tag_data):
     code = generate_code()
     dl_audio(code,data.url)
-    tag(code,data.title, data.artist, data.album, data.genre)
+    tag(code,data.title, data.artist, data.album, data.genre, data.year)
     path = f"audiofiles/mp3s/{code}.mp3"
+    if(os.path.exists("audiofiles/temp/rm.webm")):
+        os.remove("audiofiles/temp/rm.webm")
+    if(os.path.exists("audiofiles/temp/rm.m4a")):
+        os.remove("audiofiles/temp/rm.m4a")
     return FileResponse(path, media_type='audio/mpeg', filename='file.mp3')
 
 
 @app.get("/cleanup")
 async def cleanup():
-    cleanup()
+    return {"status": str(cleanup())}
         
-    
+@app.get("/quote")
+async def quote():
+    # TODO: make sure this works
+    # quote = get_quote()
+    # return {quote[0], quote[1]}
+

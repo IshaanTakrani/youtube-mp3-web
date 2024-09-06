@@ -5,6 +5,8 @@ import os
 import random
 import string
 import glob
+import json
+
 
 
 def generate_code():
@@ -12,33 +14,34 @@ def generate_code():
 
 
 def dl_audio(fname, url):
+    
+    stat = ""
+    info_dict = ""
+    input_file  = ""
 
     ydl_opts = {
         'format': 'bestaudio/best',
         'outtmpl': 'audiofiles/temp/rm.%(ext)s',
     }
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(url, download=True)
-        input_file = ydl.prepare_filename(info_dict)
-        print("CHECK: ", input_file)
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(url, download=True)
+            input_file = ydl.prepare_filename(info_dict)
+            print("CHECK: ", input_file)
+            audio_clip = AudioFileClip(input_file)
+            audio_clip.write_audiofile(f"audiofiles/mp3s/{fname}.mp3")
 
+    except yt_dlp.utils.DownloadError as e:
+        return "S01"
 
-    audio_clip = AudioFileClip(input_file)
-    audio_clip.write_audiofile(f"audiofiles/mp3s/{fname}.mp3")
-    # os.remove("audiofiles/temp/rm.webm")
-    # TODO: maybe remove later (below)
-    if(os.path.isdir("audiofiles/temp/rm.webm")):
-        os.remove("audiofiles/temp/rm.webm")
-        print("webm")
-    elif (os.path.isdir("audiofiles/temp/rm.m4a")):
-        os.remove("audiofiles/temp/rm.m4a")
-        print("m4a")
-
+    except OSError as e:
+        return "S02"
+    
 
 
 
-def tag(fname,title, artist, album, genre):
+def tag(fname,title, artist, album, genre, year):
 
     dire = os.path.join("audiofiles/mp3s", f"{fname}.mp3")
     f = music_tag.load_file(str(r'{}'.format(dire)))
@@ -47,7 +50,8 @@ def tag(fname,title, artist, album, genre):
         "title": title,
         "artist": artist,
         "album": album,
-        "genre": genre
+        "genre": genre,
+        "year": year
     }
 
     # TODO: test to see which below works
@@ -56,29 +60,40 @@ def tag(fname,title, artist, album, genre):
         if(val != ""):
             f[key] = val
 
-    f['title'] = title
-    f['artist'] = artist
-    f['album'] = album
-    f['genre'] = genre
-
     f.save()
 
 
 
 
 def cleanup():
-    
-    if(os.path.exists("audiofiles/temp/rm.webm")):
-        os.remove("audiofiles/temp/rm.webm")
 
-    if(os.path.exists("audiofiles/temp/rm.m4a")):
-        os.remove("audiofiles/temp/rm.m4a")
+    try:
+        
+        if(os.path.exists("audiofiles/temp/rm.webm")):
+            os.remove("audiofiles/temp/rm.webm")
 
-    files = glob.glob('audiofiles/mp3s/*')
-    for f in files:
-        os.remove(f)
+        if(os.path.exists("audiofiles/temp/rm.m4a")):
+            os.remove("audiofiles/temp/rm.m4a")
+
+        files = glob.glob('audiofiles/mp3s/*')
+        for f in files:
+            os.remove(f)
+        
+        return
     
+    except Exception as e:
+        return "S03"
+
+    
+
+def get_quote():
+    with open("quotes.json", "r") as file:
+        quotes = json.load(file)
+        # print(random.choice(quotes)["author"])
+        # print(random.choice(quotes)["quote"])
+        return random.choice(quotes)["quote"], random.choice(quotes)["author"]
+
+# print(get_quote())
+
 
 # cleanup()
-
-
