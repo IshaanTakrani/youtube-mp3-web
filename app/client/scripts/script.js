@@ -6,15 +6,15 @@ let trackTitle = document.querySelector("#title");
 let trackArtist = document.querySelector("#artist");
 let trackAlbum = document.querySelector("#album");
 let trackGenre = document.querySelector("#genre");
+let trackYear = document.querySelector("#year");
+let submitBtn = document.querySelector("#submit");
 
-function insertDownloadButton() {
-  let downloadBtn = document.createElement("button");
-  downloadBtn.innerHTML = "Download";
-  downloadBtn.id = "download";
+submitBtn.addEventListener("click", () => {
+  insertLoad();
+  getMp3();
+});
 
-  loading_div.innerHTML = null;
-  loading_div.appendChild(downloadBtn);
-}
+function insertDownloadButton() {}
 
 function insertLoad() {
   let loading_symbol = document.createElement("div");
@@ -23,7 +23,11 @@ function insertLoad() {
   loading_div.appendChild(loading_symbol);
 }
 
-function cleanup() {} // TODO: Make cleanup work, call when file is downloaded. Send request to remove all temp audio files from server
+function cleanup() {
+  fetch("http://localhost:8000/cleanup")
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+} // TODO: Make cleanup work, call when file is downloaded. Send request to remove all temp audio files from server
 
 async function getMp3() {
   try {
@@ -38,6 +42,7 @@ async function getMp3() {
         artist: trackArtist.value,
         album: trackAlbum.value,
         genre: trackGenre.value,
+        year: trackYear.value,
       }),
       cache: "no-store",
     });
@@ -48,14 +53,26 @@ async function getMp3() {
 
     let blob = await response.blob();
     let url = URL.createObjectURL(blob);
+
+    let downloadBtn = document.createElement("button");
+    downloadBtn.innerHTML = "Download";
+    downloadBtn.id = "download";
+
     let tempAnchor = document.createElement("a");
+    tempAnchor.appendChild(downloadBtn);
     tempAnchor.href = url;
     tempAnchor.download = trackTitle.value + ".mp3";
-    document.body.appendChild(tempAnchor);
-    tempAnchor.click();
-    document.body.removeChild(tempAnchor);
-    URL.revokeObjectURL(url);
+    // document.body.appendChild(tempAnchor);
+    loading_div.innerHTML = null;
+    loading_div.appendChild(tempAnchor);
+    // tempAnchor.click();
+    // document.body.removeChild(tempAnchor);
+    // URL.revokeObjectURL(url);
   } catch (error) {
     console.error(error);
   }
 }
+
+fetch("http://localhost:8000/quote")
+  .then((response) => response.json())
+  .then((json) => console.log(json));
