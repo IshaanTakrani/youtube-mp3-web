@@ -50,6 +50,9 @@ async function getMp3() {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
+    // if (response.error != null) {
+    //   console.log("hi");
+    // }
 
     let blob = await response.blob();
     let url = URL.createObjectURL(blob);
@@ -64,6 +67,7 @@ async function getMp3() {
     tempAnchor.download = trackTitle.value + ".mp3";
     // document.body.appendChild(tempAnchor);
     loading_div.innerHTML = null;
+    // loading_div.appendChild(tempAnchor);
     loading_div.appendChild(tempAnchor);
     // tempAnchor.click();
     // document.body.removeChild(tempAnchor);

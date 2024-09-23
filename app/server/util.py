@@ -36,7 +36,13 @@ def dl_audio(fname, url):
         return "S01"
 
     except OSError as e:
+        print(e)
         return "S02"
+    
+    except Exception as e:
+        return "S10"
+    
+    return "S00"
     
 
 
