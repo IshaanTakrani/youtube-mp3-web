@@ -7,6 +7,9 @@ let trackArtist = document.querySelector("#artist");
 let trackAlbum = document.querySelector("#album");
 let trackGenre = document.querySelector("#genre");
 let trackYear = document.querySelector("#year");
+if (Number.isInteger(document.querySelector("#year"))) {
+  console.log("int");
+}
 let submitBtn = document.querySelector("#submit");
 
 submitBtn.addEventListener("click", () => {
@@ -19,8 +22,23 @@ function insertDownloadButton() {}
 function insertLoad() {
   let loading_symbol = document.createElement("div");
   loading_symbol.classList.add("lds-dual-ring");
+
+  // make quote
+  let quoteBody = document.createElement("p");
+  quoteBody.classList.add("quote");
+  let quoteAuthor = document.createElement("p");
+  quoteAuthor.classList.add("quote");
+
+  quoteBody.innerHTML =
+    "The sky above the port was the color of television tuned to a dead channel";
+  quoteAuthor.innerHTML = "William Gibson";
+
+  // TODO: Get quote from server here
+
   loading_div.innerHTML = null;
   loading_div.appendChild(loading_symbol);
+  loading_div.appendChild(quoteBody);
+  loading_div.appendChild(quoteAuthor);
 }
 
 function cleanup() {
@@ -63,8 +81,10 @@ async function getMp3() {
     tempAnchor.href = url;
     tempAnchor.download = trackTitle.value + ".mp3";
     // document.body.appendChild(tempAnchor);
+
     loading_div.innerHTML = null;
     loading_div.appendChild(tempAnchor);
+
     // tempAnchor.click();
     // document.body.removeChild(tempAnchor);
     // URL.revokeObjectURL(url);
