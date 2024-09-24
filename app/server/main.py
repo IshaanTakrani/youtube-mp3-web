@@ -31,9 +31,9 @@ app.add_middleware(
 )
 
 
-@app.get("/quote")
-async def quote():
-    return {"quote": "the sky above the port was the color of television tuned to a dead channel. 22"}
+# @app.get("/quote")
+# async def quote():
+#     return {"quote": "the sky above the port was the color of television tuned to a dead channel. 22"}
 
 
 
@@ -56,8 +56,10 @@ async def cleanup():
         
 @app.get("/quote")
 async def quote():
-    pass
+    # pass
     # TODO: make sure this works
-    # quote = get_quote()
+    quote = get_quote()
+    print(quote[0], "\n", quote[1])
     # return {quote[0], quote[1]}
+    return {"quote": quote[0], "author": quote[1]}
 

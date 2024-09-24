@@ -51,8 +51,9 @@ def tag(fname,title, artist, album, genre, year):
         "artist": artist,
         "album": album,
         "genre": genre,
-        "year": year
+        "year": int(year)
     }
+        
 
     # TODO: test to see which below works
 
@@ -60,6 +61,7 @@ def tag(fname,title, artist, album, genre, year):
         if(val != ""):
             f[key] = val
 
+    
     f.save()
 
 
