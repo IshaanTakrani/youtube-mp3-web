@@ -12,6 +12,7 @@ class Mp3_tag_data(BaseModel):
     artist: str
     genre: str
     year: str
+    cover: str
 
 
 app = FastAPI()
@@ -43,10 +44,10 @@ async def submit_tag_data(data: Mp3_tag_data):
     dl_audio(code,data.url)
     tag(code,data.title, data.artist, data.album, data.genre, data.year)
     path = f"audiofiles/mp3s/{code}.mp3"
-    if(os.path.exists("audiofiles/temp/rm.webm")):
-        os.remove("audiofiles/temp/rm.webm")
-    if(os.path.exists("audiofiles/temp/rm.m4a")):
-        os.remove("audiofiles/temp/rm.m4a")
+    # if(os.path.exists("audiofiles/temp/rm.webm")):
+    #     os.remove("audiofiles/temp/rm.webm")
+    # if(os.path.exists("audiofiles/temp/rm.m4a")):
+    #     os.remove("audiofiles/temp/rm.m4a")
     return FileResponse(path, media_type='audio/mpeg', filename='file.mp3')
 
 

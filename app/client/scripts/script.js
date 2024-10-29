@@ -1,3 +1,4 @@
+// const fs = require("fs");
 let downloadBtn = document.querySelector("download");
 let loading_div = document.querySelector("#loading");
 let yturl = document.querySelector("#url");
@@ -7,6 +8,9 @@ let trackArtist = document.querySelector("#artist");
 let trackAlbum = document.querySelector("#album");
 let trackGenre = document.querySelector("#genre");
 let trackYear = document.querySelector("#year");
+let coverString = "";
+let convertBtn = document.getElementById("convert-b64");
+
 if (Number.isInteger(document.querySelector("#year"))) {
   console.log("int");
 }
@@ -16,6 +20,25 @@ submitBtn.addEventListener("click", () => {
   insertLoad();
   getMp3();
 });
+
+function imgToBase64() {
+  let cover = document.getElementById("cover");
+  let imgFile = cover.files[0];
+  // console.log(imgFile);
+  // imgB64 = fs;
+  if (imgFile) {
+    // const base64String = "";
+    const reader = new FileReader();
+    reader.readAsDataURL(imgFile);
+    // console.log(reader.result);
+    reader.onload = function () {
+      const base64String = reader.result;
+      console.log(base64String);
+      coverString = base64String.slice(base64String.indexOf(",") + 1);
+      console.log(coverString);
+    };
+  }
+}
 
 function insertDownloadButton() {}
 
@@ -49,6 +72,7 @@ function cleanup() {
 
 async function getMp3() {
   try {
+    // let cover = imgToBase64();
     let response = await fetch("http://localhost:8000/submit-tag-data", {
       method: "POST",
       headers: {
@@ -61,6 +85,7 @@ async function getMp3() {
         album: trackAlbum.value,
         genre: trackGenre.value,
         year: trackYear.value,
+        cover: coverString,
       }),
       cache: "no-store",
     });

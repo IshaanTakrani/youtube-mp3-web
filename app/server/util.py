@@ -6,6 +6,7 @@ import random
 import string
 import glob
 import json
+import base64
 
 
 

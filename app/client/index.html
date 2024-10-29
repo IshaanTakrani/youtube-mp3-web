@@ -59,9 +59,18 @@
             <td>Year:</td>
             <td><input type="text" id="year" /></td>
           </tr>
+          <tr>
+            <td>Album Cover:</td>
+            <td>
+              <input type="file" id="cover" accept="image/*" id="cover-input" />
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
+
+    <button id="convert-b64" onclick="imgToBase64()">convert</button>
+    <!-- <img src="media/chameleon.jpg" alt="chameleon" id="test-img" /> -->
     <!--  -->
     <!-- <div id="action-buttons">
       <button id="submit">Convert to MP3</button>

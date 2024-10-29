@@ -298,3 +298,7 @@ table tfoot .links a {
     transform: rotate(360deg);
   }
 }
+
+#cover-input {
+  width: 200px;
+}
